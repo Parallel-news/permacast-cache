@@ -4,6 +4,7 @@ import {
   getPodcasts,
   getEpisodes,
 } from "../utils/cache.js";
+import { generateRss } from "../utils/rss.js";
 import express from "express";
 import base64url from "base64url";
 
@@ -22,6 +23,12 @@ app.get("/feeds/episodes/:pid", async (req, res) => {
   const encodedFeed = await getEpisodes(req.params.pid);
   const jsonRes = JSON.parse(base64url.decode(encodedFeed));
   res.send(jsonRes);
+});
+
+app.get("/feeds/rss/:pid", async (req, res) => {
+  res.setHeader("Content-Type", "application/xml");
+  const rss = await generateRss(req.params.pid);
+  res.send(rss);
 });
 
 app.listen(port, async () => {
