@@ -23,6 +23,7 @@
     "memory-cache": "^0.2.0",
     "node-cache": "^5.1.2",
     "redstone-smartweave": "^0.4.2",
+    "rss": "^1.2.2",
     "smartweave": "^0.4.46"
   }
 }
