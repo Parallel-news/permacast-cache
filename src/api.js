@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: 'https://www.permacast.net'
+    origin: "*"
 }));
 
 app.get("/feeds/podcasts", async (req, res) => {
