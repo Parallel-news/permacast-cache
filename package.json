@@ -1,6 +1,6 @@
 {
   "name": "permacast-cache",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "type": "module",
   "description": "cache node for Permacast",
   "main": "./src/api.js",
