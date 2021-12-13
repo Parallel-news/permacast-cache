@@ -7,9 +7,14 @@ import {
 import { generateRss } from "./utils/rss.js";
 import express from "express";
 import base64url from "base64url";
+import cors  from "cors";
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors({
+    origin: 'https://www.permacast.net'
+}));
 
 app.get("/feeds/podcasts", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
