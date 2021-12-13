@@ -52,12 +52,13 @@ export async function getPodcasts() {
     if (podcasts.length > 1) {
       for (let podcast of podcasts) {
         delete podcast["logs"];
-        res.push(podcast);
-      }
-    }
+          res.push(podcast);
 
-    delete podcasts[0]["logs"];
-    res.push(podcasts[0]);
+      }
+    } else {
+      delete podcasts[0]["logs"];
+      res.push(podcasts[0]);
+    }
   }
 
   const response = {
