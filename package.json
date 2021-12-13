@@ -1,6 +1,6 @@
 {
   "name": "permacast-cache",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "description": "cache node for Permacast",
   "main": "./src/api.js",
@@ -19,6 +19,7 @@
     "arweave": "^1.10.18",
     "axios": "^0.24.0",
     "base64url": "^3.0.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "memory-cache": "^0.2.0",
     "node-cache": "^5.1.2",
