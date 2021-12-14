@@ -1,6 +1,7 @@
 import NodeCache from "node-cache";
 import base64url from "base64url";
 import { getFactoriesState } from "./smartweave.js";
+import { BLACKLIST } from "./constants/blacklist.js";
 const base64Cache = new NodeCache();
 
 async function cache() {
@@ -20,6 +21,26 @@ async function cache() {
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function removeBlacklists(podObj) {
+  const episodes = podObj["episodes"];
+  const blacklists = episodes.filter((episode) =>
+    BLACKLIST.episodes.includes(episode.eid)
+  );
+
+  if (blacklists.length === 0) {
+    return podObj;
+  }
+
+  for (let episode of blacklists) {
+    const epIndex = episodes.findIndex((ep) => ep.eid === episode);
+    episodes.splice(epIndex, 1);
+  }
+
+  podObj["episodes"] = episodes;
+
+  return podObj;
 }
 
 async function getPermacast() {
@@ -84,7 +105,8 @@ export async function getEpisodes(pid) {
     return EMPTY_OBJECT;
   }
 
-  return base64url(JSON.stringify(podcasts[podcastIndex]));
+  const podcastObject = removeBlacklists(podcasts[podcastIndex])
+  return base64url(JSON.stringify(podcastObject));
 }
 
 export async function polling(blocksNb) {
