@@ -4,7 +4,7 @@ cache node for [permacast.net](https://permacast.net)
 ## Supported Endpoints
 
 ### 1- Permacast Podcasts Object:
-Request: POST `/feeds/podcasts`
+Request: GET `/feeds/podcasts`
 
 Return: Array of podcast objects
 
@@ -15,13 +15,13 @@ Return: Array of podcast objects
 ```
 
 ### 2- Podcast's Episodes
-Request: POST `/feeds/episodes/:pid`
+Request: GET `/feeds/episodes/:pid`
 
 Return: Single podcast objects
 
 #### Example:
 
-POST `/feeds/episodes/4vTYMVWWxZaU2n2OI4cC-EgC86GcOnz-CaVW7iUwPK4`
+GET `/feeds/episodes/4vTYMVWWxZaU2n2OI4cC-EgC86GcOnz-CaVW7iUwPK4`
 
 ```json
 {
@@ -110,13 +110,13 @@ POST `/feeds/episodes/4vTYMVWWxZaU2n2OI4cC-EgC86GcOnz-CaVW7iUwPK4`
 ```
 
 ### 3- Podcast's RSS Feed
-Request: POST `/feeds/rss/:pid`
+Request: GET `/feeds/rss/:pid`
 
 Return: Podcast's RSS as XML
 
 #### Example:
 
-POST `/feeds/rss/4vTYMVWWxZaU2n2OI4cC-EgC86GcOnz-CaVW7iUwPK4`
+GET `/feeds/rss/4vTYMVWWxZaU2n2OI4cC-EgC86GcOnz-CaVW7iUwPK4`
 
 ```xml
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
