@@ -34,7 +34,7 @@ function removeBlacklists(podObj) {
   }
 
   for (let episode of blacklists) {
-    const epIndex = episodes.findIndex((ep) => ep.eid === episode);
+    const epIndex = episodes.findIndex((ep) => ep.eid === episode.eid);
     episodes.splice(epIndex, 1);
   }
 
