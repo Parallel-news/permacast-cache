@@ -109,6 +109,32 @@ export async function getEpisodes(pid) {
   return base64url(JSON.stringify(podcastObject));
 }
 
+export async function singleEpisode(pid, eid) {
+  const EMPTY_ARRAY = "W10";
+  const EMPTY_OBJECT = "e30";
+  const podcastObject = JSON.parse(base64url.decode(await getEpisodes(pid)));
+  const episodes = podcastObject["episodes"];
+
+  const terminators = [EMPTY_ARRAY, undefined];
+  if (terminators.includes(episodes)) {
+    return EMPTY_OBJECT;
+  }
+
+  if (eid.length !== 43) {
+    const index = Number(eid);
+    const episode = episodes[index] ? episodes[index] : EMPTY_OBJECT;
+    return base64url(JSON.stringify(episode));
+  }
+
+  const episodeIndex = episodes.findIndex((episode) => episode.eid === eid);
+
+  if (episodeIndex === -1) {
+    return EMPTY_OBJECT;
+  }
+
+  return base64url(JSON.stringify(episodes[episodeIndex]));
+}
+
 export async function polling(blocksNb) {
   while (true) {
     if (!blocksNb) {
