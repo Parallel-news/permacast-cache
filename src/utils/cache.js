@@ -136,14 +136,18 @@ export async function singleEpisode(pid, eid) {
 }
 
 export async function polling(blocksNb) {
-  while (true) {
-    if (!blocksNb) {
-      var blocksNb = 1;
-    }
+  try {
+    while (true) {
+      if (!blocksNb) {
+        var blocksNb = 1;
+      }
 
-    await cache();
-    // in sec
-    const EST_BLOCK_TIME = 2 * 60 * 1000 * blocksNb;
-    await sleep(EST_BLOCK_TIME);
+      await cache();
+      // in sec
+      const EST_BLOCK_TIME = 2 * 60 * 1000 * blocksNb;
+      await sleep(EST_BLOCK_TIME);
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
