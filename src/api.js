@@ -3,6 +3,7 @@ import {
   polling,
   getPodcasts,
   getEpisodes,
+  singleEpisode,
 } from "./utils/cache.js";
 import { generateRss } from "./utils/rss.js";
 import express from "express";
@@ -36,6 +37,14 @@ app.get("/feeds/rss/:pid", async (req, res) => {
   res.send(rss);
 });
 
+app.get("/feeds/view/:pid/:eid", async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  const pid = req.params.pid;
+  const eid = req.params.eid;
+  const encodedFeed = await singleEpisode(pid, eid);
+  const jsonRes = JSON.parse(base64url.decode(encodedFeed));
+  res.send(jsonRes);
+});
 app.listen(port, async () => {
   await polling();
   console.log(`listening at http://localhost:${port}`);
