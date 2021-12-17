@@ -38,9 +38,9 @@ export async function getFactoriesState() {
 }
 
 async function getStateOf(contractId) {
-  const contract = smartweave.contract(contractId);
-  const contractState = (await contract.readState()).state;
-//   const contractState = await readContract(arweave, contractId);
+//   const contract = smartweave.contract(contractId);
+//   const contractState = (await contract.readState()).state;
+  const contractState = await readContract(arweave, contractId);
 
   return contractState;
 }
