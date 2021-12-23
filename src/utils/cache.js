@@ -135,6 +135,33 @@ export async function singleEpisode(pid, eid) {
   return base64url(JSON.stringify(episodes[episodeIndex]));
 }
 
+export async function getTotalPermacastSize() {
+  const response = await getPodcasts();
+
+  if (response === "e30") {
+    return base64url(JSON.stringify({ total_byte_size: "pending" }));
+  }
+
+  const podcasts = JSON.parse(base64url.decode(response)).res;
+  let totalSize = 0;
+
+  for (let podcast of podcasts) {
+    const episodes = podcast["episodes"];
+
+    if (episodes.length === 0) {
+      continue;
+    }
+    const sizeArray = episodes.map((ep) => ep.audioTxByteSize);
+    const podcastSize = sizeArray.reduce((a, b) => a + b, 0);
+    totalSize += podcastSize;
+  }
+
+  const re = {
+    total_byte_size: totalSize,
+  };
+  return base64url(JSON.stringify(re));
+}
+
 export async function polling(blocksNb) {
   try {
     while (true) {
