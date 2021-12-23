@@ -4,6 +4,7 @@ import {
   getPodcasts,
   getEpisodes,
   singleEpisode,
+  getTotalPermacastSize,
 } from "./utils/cache.js";
 import { generateRss } from "./utils/rss.js";
 import express from "express";
@@ -45,7 +46,15 @@ app.get("/feeds/view/:pid/:eid", async (req, res) => {
   const jsonRes = JSON.parse(base64url.decode(encodedFeed));
   res.send(jsonRes);
 });
+
+app.get("/size/permacast", async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  const encodedRes = await getTotalPermacastSize();
+  const jsonRes = JSON.parse(base64url.decode(encodedRes));
+  res.send(jsonRes);
+});
+
 app.listen(port, async () => {
   await polling();
-  console.log(`listening at http://localhost:${port}`);
+  console.log(`listening at PORT:${port}`);
 });
