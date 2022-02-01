@@ -2,7 +2,10 @@
 // based on the request of their owners
 
 export const BLACKLIST = {
-  podcasts: ["JIixQWc-Mq6Y6PTPWm32s3qfCEPi3VVmyACMd59lOhg"],
+  podcasts: [
+    "JIixQWc-Mq6Y6PTPWm32s3qfCEPi3VVmyACMd59lOhg",
+    "4Fgz8WmTlzCbD-F619OBLBHwTopVoOTvryTNjSyWvuQ",
+  ],
   episodes: [
     "qAKLFkO_PZwcXzvt9naoZ3KzatTqxrxWXc7kk8LcSJI",
     "iJUt4Pn8EbC-vkcCiHKGzgQuoSVHa-eEzvb4QqDgxy4",
