@@ -223,4 +223,4 @@ GET `/feeds/rss/4vTYMVWWxZaU2n2OI4cC-EgC86GcOnz-CaVW7iUwPK4`
 ```
 
 ## License
-This project is licensed under the MIT license
+This project is licensed under the [MIT license](./LICENSE)
