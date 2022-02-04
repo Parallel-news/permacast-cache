@@ -222,5 +222,11 @@ GET `/feeds/rss/4vTYMVWWxZaU2n2OI4cC-EgC86GcOnz-CaVW7iUwPK4`
 </rss>
 ```
 
+### 4- Permacast Size
+
+Request: GET `/size/permacast`
+
+Return: total episodes size in GiB
+
 ## License
 This project is licensed under the [MIT license](./LICENSE)
