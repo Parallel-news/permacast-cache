@@ -5,6 +5,7 @@ export const BLACKLIST = {
   podcasts: [
     "JIixQWc-Mq6Y6PTPWm32s3qfCEPi3VVmyACMd59lOhg",
     "4Fgz8WmTlzCbD-F619OBLBHwTopVoOTvryTNjSyWvuQ",
+    "PX7NknKqPnK03ZX8BakhX3aLpGUA0JcauBtfBBqvivY",
   ],
   episodes: [
     "qAKLFkO_PZwcXzvt9naoZ3KzatTqxrxWXc7kk8LcSJI",
