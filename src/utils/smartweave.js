@@ -41,13 +41,16 @@ export async function getFactoriesState() {
   const states = [];
   for (let factory of factoriesObj) {
     const unfiliteredState = await getStateOf(factory.id);
-    const state = await blacklistFactoryPodcast(unfiliteredState);
-    // set factory metadata
-    state.factory_id = factory.id;
-    state.owner = factory.owner;
-    state.factoryCreationTimestamp = factory.timestamp;
 
-    states.push(state);
+    // set factory metadata
+    if (unfiliteredState) {
+      const state = await blacklistFactoryPodcast(unfiliteredState);
+
+      state.factory_id = factory.id;
+      state.owner = factory.owner;
+      state.factoryCreationTimestamp = factory.timestamp;
+      states.push(state);
+    }
   }
 
   const response = {
@@ -56,10 +59,17 @@ export async function getFactoriesState() {
   return base64url(JSON.stringify(response));
 }
 
-async function getStateOf(contractId) {
-//   const contract = smartweave.contract(contractId);
-//   const contractState = (await contract.readState()).state;
-  const contractState = await readContract(arweave, contractId);
 
-  return contractState;
+async function getStateOf(contractId) {
+  // const contract = smartweave.contract(contractId);
+  // const contractState = (await contract.readState()).state;
+  try {
+    const contractState = await readContract(arweave, contractId);
+
+    return contractState;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 }
+
