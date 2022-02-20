@@ -29,16 +29,17 @@ async function blacklistFactoryPodcast(state) {
     blacklistedPodcastsArray.includes(podObj.pid)
   );
 
-  if (blacklistedPodcastsArray.length > 0) {
-    const filteredState = state.podcasts.filter(
+  if (blacklistedPodcasts.length > 0) {
+    const filteredPodcasts = state.podcasts.filter(
       (pod) => !blacklistedPodcasts.includes(pod)
     );
-    return filteredState;
+
+    state.podcasts = filteredPodcasts;
+    return state;
   }
 
   return state;
 }
-
 
 export async function getFactoriesState() {
   const factoriesObj = await getFactoriesObjects();
