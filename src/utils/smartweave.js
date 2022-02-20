@@ -24,17 +24,21 @@ async function blacklistFactoryPodcast(state) {
   // remove the podcast object from the factory's
   // state and return the new state if blacklist
   // was found
-  const blacklistedPodcasts = BLACKLIST.podcasts;
-  const blacklistedPodcastIndex = state.podcasts.findIndex((podObj) =>
-    blacklistedPodcasts.includes(podObj.pid)
+  const blacklistedPodcastsArray = BLACKLIST.podcasts;
+  const blacklistedPodcasts = state.podcasts.filter((podObj) =>
+    blacklistedPodcastsArray.includes(podObj.pid)
   );
-  if (blacklistedPodcastIndex !== -1) {
-    state.podcasts.splice(blacklistedPodcastIndex, 1);
-    return state;
+
+  if (blacklistedPodcastsArray.length > 0) {
+    const filteredState = state.podcasts.filter(
+      (pod) => !blacklistedPodcasts.includes(pod)
+    );
+    return filteredState;
   }
 
   return state;
 }
+
 
 export async function getFactoriesState() {
   const factoriesObj = await getFactoriesObjects();
