@@ -8,7 +8,6 @@ export const BLACKLIST = {
     "PX7NknKqPnK03ZX8BakhX3aLpGUA0JcauBtfBBqvivY",
     "Vzg7VRLUyXxiloTFULpoKBq-V4cy83BLBaU3rsM1t68",
     "He29Z1JFutLID5IyjEFR6ydJbcYwFBLLsm1KTjgUa08",
-    "PX7NknKqPnK03ZX8BakhX3aLpGUA0JcauBtfBBqvivY",
   ],
   episodes: [
     "qAKLFkO_PZwcXzvt9naoZ3KzatTqxrxWXc7kk8LcSJI",
