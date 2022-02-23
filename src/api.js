@@ -1,4 +1,5 @@
 import { getFactoriesState } from "./utils/smartweave.js";
+import { getEpisodeMetadata } from "./embed/embeding.js";
 import {
   polling,
   getPodcasts,
@@ -17,6 +18,7 @@ const port = process.env.PORT || 3000;
 app.use(cors({
     origin: "*"
 }));
+app.set("view engine", "ejs");
 
 app.get("/feeds/podcasts", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
@@ -52,6 +54,11 @@ app.get("/size/permacast", async (req, res) => {
   const encodedRes = await getTotalPermacastSize();
   const jsonRes = JSON.parse(base64url.decode(encodedRes));
   res.send(jsonRes);
+});
+
+app.get("/embed/:eid", async(req, res) => {
+  const metadata = await getEpisodeMetadata(req.params.eid);
+  res.render("index", {metadata: metadata});
 });
 
 app.listen(port, async () => {
