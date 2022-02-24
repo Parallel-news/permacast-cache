@@ -5,6 +5,7 @@ import {
   getPodcasts,
   getEpisodes,
   singleEpisode,
+  getProfileFeed,
   getTotalPermacastSize,
 } from "./utils/cache.js";
 import { generateRss } from "./utils/rss.js";
@@ -52,6 +53,13 @@ app.get("/feeds/view/:pid/:eid", async (req, res) => {
 app.get("/size/permacast", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
   const encodedRes = await getTotalPermacastSize();
+  const jsonRes = JSON.parse(base64url.decode(encodedRes));
+  res.send(jsonRes);
+});
+
+app.get("/feeds/user/:address", async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  const encodedRes = await getProfileFeed(req.params.address);
   const jsonRes = JSON.parse(base64url.decode(encodedRes));
   res.send(jsonRes);
 });
