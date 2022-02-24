@@ -162,6 +162,23 @@ export async function getTotalPermacastSize() {
   return base64url(JSON.stringify(re));
 }
 
+export async function getProfileFeed(address) {
+  const response = await getPodcasts();
+
+  if (response === "e30") {
+    return base64url(JSON.stringify({ res: "pending" }));
+  }
+
+  const podcasts = JSON.parse(base64url.decode(response)).res;
+  const ownedPodcasts = podcasts.filter((podcast) => podcast.owner === address);
+
+  const re = {
+    res: ownedPodcasts,
+  };
+
+  return base64url(JSON.stringify(re));
+}
+
 export async function polling(blocksNb) {
   try {
     while (true) {
