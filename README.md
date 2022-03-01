@@ -228,5 +228,11 @@ Request: GET `/size/permacast`
 
 Return: total episodes size in GiB
 
+### 5- Embed Episode
+
+Request: GET `/embed/:eid`
+
+Return: episode audio player fits for iframe embedding
+
 ## License
 This project is licensed under the [MIT license](./LICENSE)
