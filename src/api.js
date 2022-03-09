@@ -9,6 +9,7 @@ import {
   getTotalPermacastSize,
 } from "./utils/cache.js";
 import { generateRss } from "./utils/rss.js";
+import { sort } from "./utils/sort.js";
 import express from "express";
 import base64url from "base64url";
 import cors  from "cors";
@@ -67,6 +68,13 @@ app.get("/feeds/user/:address", async (req, res) => {
 app.get("/embed/:eid", async(req, res) => {
   const metadata = await getEpisodeMetadata(req.params.eid);
   res.render("index", {metadata: metadata});
+});
+
+app.get("/feeds/podcasts/sort/:type", async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  const encodedRes = await sort(req.params.type);
+  const jsonRes = JSON.parse(base64url.decode(encodedRes));
+  res.send(jsonRes);
 });
 
 app.listen(port, async () => {
