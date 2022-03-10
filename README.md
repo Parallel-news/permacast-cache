@@ -236,8 +236,8 @@ Return: episode audio player fits for iframe embedding
 
 ### 6- Sort feeds
 
-- GET `feeds/podcasts/sort/episodescount` -> sort podcasts by the episodes count
-- GET `feeds/podcasts/sort/podcastsactivity` -> sort podcasts by latest activity
+- GET `/feeds/podcasts/sort/episodescount` -> sort podcasts by the episodes count
+- GET `/feeds/podcasts/sort/podcastsactivity` -> sort podcasts by latest activity
 
 ## License
 This project is licensed under the [MIT license](./LICENSE)
