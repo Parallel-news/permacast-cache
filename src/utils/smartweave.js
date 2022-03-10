@@ -24,14 +24,11 @@ async function blacklistFactoryPodcast(state) {
   // remove the podcast object from the factory's
   // state and return the new state if blacklist
   // was found
-  let blacklistedPodcastsArray;
-
-  try {
-    blacklistedPodcastsArray = (await getStateOf(MASKING_CONTRACT)).podcasts;
-  } catch (error) {
+  let blacklistedPodcastsArray = (await getStateOf(MASKING_CONTRACT))?.podcasts;
+  
+  if (!blacklistedPodcastsArray) {
     blacklistedPodcastsArray = BLACKLIST.podcasts;
   }
-
   const blacklistedPodcasts = state.podcasts.filter((podObj) =>
     blacklistedPodcastsArray.includes(podObj.pid)
   );
