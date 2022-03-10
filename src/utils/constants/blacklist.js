@@ -28,3 +28,5 @@ export const BLACKLIST = {
     "j71ILpUV1r7to23SnDQPfDpdIa8LRvtueTB85gTmJFc",
   ],
 };
+
+export const MASKING_CONTRACT = "rFD_owQauwCYgahb4nD2WaMW4tIstmg47gN1QtRhcpE";
