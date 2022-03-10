@@ -1,6 +1,6 @@
 import NodeCache from "node-cache";
 import base64url from "base64url";
-import { getFactoriesState } from "./smartweave.js";
+import { getFactoriesState, getStateOf } from "./smartweave.js";
 import { BLACKLIST, MASKING_CONTRACT } from "./constants/blacklist.js";
 const base64Cache = new NodeCache();
 
@@ -25,11 +25,9 @@ function sleep(ms) {
 
 async function removeBlacklists(podObj) {
   const episodes = podObj["episodes"];
-  let BLACKLISTED_EPISODES;
-
-  try {
-    BLACKLISTED_EPISODES = await getStateOf(MASKED);
-  } catch (error) {
+  let BLACKLISTED_EPISODES = await getStateOf(MASKED);
+  
+  if (!BLACKLISTED_EPISODES) {
     BLACKLISTED_EPISODES = BLACKLIST;
   }
 
