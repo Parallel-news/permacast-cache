@@ -81,7 +81,7 @@ export async function getStateOf(contractId) {
 
     return contractState;
   } catch (error) {
-    throw new Error(`SMARTWEAVE ERROR: ${error.name} : ${error.description}`);
+    console.log(`SMARTWEAVE ERROR: ${error.name} : ${error.description}`);
     return false;
   }
 }
