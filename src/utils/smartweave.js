@@ -1,5 +1,5 @@
 import { smartweave, arweave } from "./arweave.js";
-import { BLACKLIST } from "./constants/blacklist.js";
+import { BLACKLIST, MASKING_CONTRACT } from "./constants/blacklist.js";
 import { readContract } from "smartweave";
 import { gqlTemplate, permacastDeepGraphs } from "./gql.js";
 import base64url from "base64url";
@@ -24,7 +24,14 @@ async function blacklistFactoryPodcast(state) {
   // remove the podcast object from the factory's
   // state and return the new state if blacklist
   // was found
-  const blacklistedPodcastsArray = BLACKLIST.podcasts;
+  let blacklistedPodcastsArray;
+
+  try {
+    blacklistedPodcastsArray = (await getStateOf(MASKING_CONTRACT)).podcasts;
+  } catch (error) {
+    blacklistedPodcastsArray = BLACKLIST.podcasts;
+  }
+
   const blacklistedPodcasts = state.podcasts.filter((podObj) =>
     blacklistedPodcastsArray.includes(podObj.pid)
   );
@@ -40,6 +47,7 @@ async function blacklistFactoryPodcast(state) {
 
   return state;
 }
+
 
 export async function getFactoriesState() {
   const factoriesObj = await getFactoriesObjects();
@@ -65,7 +73,7 @@ export async function getFactoriesState() {
 }
 
 
-async function getStateOf(contractId) {
+export async function getStateOf(contractId) {
   // const contract = smartweave.contract(contractId);
   // const contractState = (await contract.readState()).state;
   try {
@@ -73,7 +81,7 @@ async function getStateOf(contractId) {
 
     return contractState;
   } catch (error) {
-    console.log(error);
+    throw new Error(`SMARTWEAVE ERROR: ${error.name} : ${error.description}`);
     return false;
   }
 }
