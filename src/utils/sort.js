@@ -15,7 +15,7 @@ async function episodesCountSorting() {
       (a, b) => b.episodes.length - a.episodes.length
     );
 
-    return base64url(JSON.stringify(sortedState));
+    return base64url(JSON.stringify({res: sortedState}));
   } catch (error) {
     console.log(error);
   }
@@ -42,7 +42,7 @@ async function podcastsActivitySorting() {
     const sortedState = decodedPermacast.res.sort(
       (a, b) => b.latestUpload - a.latestUpload
     );
-    return base64url(JSON.stringify(sortedState));
+    return base64url(JSON.stringify({res: sortedState}));
   } catch (error) {
     console.log(error);
   }
