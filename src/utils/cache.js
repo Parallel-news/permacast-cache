@@ -25,7 +25,7 @@ function sleep(ms) {
 
 async function removeBlacklists(podObj) {
   const episodes = podObj["episodes"];
-  podObj["original_episodes_array"] = episodes;
+//   podObj["original_episodes_array"] = episodes;
   let BLACKLISTED_EPISODES = await getStateOf(MASKING_CONTRACT);
   
   if (!BLACKLISTED_EPISODES) {
