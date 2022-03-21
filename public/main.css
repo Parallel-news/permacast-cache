@@ -1,0 +1,267 @@
+body {
+  background-color: transparent;
+}
+
+h1 {
+  font-family: monospace;
+  font-size: 16pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+  cursor: default;
+}
+
+h4 {
+  font-family: monospace;
+  font-size: 9pt;
+  font-weight: 400;
+  cursor: default;
+}
+
+h2 {
+  font-family: monospace;
+  font-size: 14pt;
+  font-weight: 300;
+  color: white;
+  cursor: default;
+}
+
+.player {
+  display: flex;
+  height: 200px;
+  width: 100%;
+  background-color: #1e2125;
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.cover {
+  width: 200px;
+  margin-right: 1rem;
+}
+
+.cover img {
+  max-width: 200px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .cover {
+    width: 100px;
+    display: flex;
+    place-content: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-right: 0;
+  }
+  
+  .cover img {
+    max-width: 100px;
+  }
+}
+
+
+.info-head {
+  margin-top: 15px;
+  width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info {
+  width: 75%;
+}
+
+.info-text {
+  line-height: 13px;
+  color: #636367;
+  max-height: 13px;
+  width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info-text {
+  line-height: 13px;
+  color: #636367;
+  max-height: 13px;
+}
+
+.button-items {
+  width: 95%;
+  margin-right: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .button-items {
+    width: 70vw;
+    margin-right: 2rem;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .button-items {
+    width: 60vw;
+    margin-right: 2rem;
+  }
+}
+
+#slider {
+  height: 8px;
+  background: #151518;
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 600px) {
+  #slider {
+    height: 8px;
+    background: #151518;
+    border-radius: 4px;
+  }
+}
+
+
+
+#slider div {
+  width: 4px;
+  height: 8px;
+  margin-top: 1px;
+  background: #ef6dbc;
+  border-radius: 4px;
+}
+
+#timer {
+  color: #494b4e;
+  line-height: 0;
+  font-size: 9pt;
+  float: right;
+  font-family: monospace;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+.controls svg:nth-child(2) {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#play {
+  padding: 0 3px;
+  width: 30px;
+  height: 30px;
+  x: 0px;
+  y: 0px;
+  enable-background: new 0 0 25 25;
+}
+
+#play g {
+  stroke: #fefefe;
+  stroke-width: 1;
+  stroke-miterlimit: 10;
+}
+
+#play g path {
+  fill: #fefefe;
+}
+
+#play:hover {
+  cursor: pointer;
+}
+
+#play:hover g {
+  stroke: #8f4da9;
+  cursor: pointer;
+}
+
+#play:hover g path {
+  fill: #9b59b6;
+  cursor: pointer;
+}
+
+.step-backward {
+  width: 18px;
+  height: 18px;
+  x: 0px;
+  y: 0px;
+  enable-background: new 0 0 25 25;
+  margin-bottom: 5px;
+}
+
+.step-backward g polygon {
+  fill: #fefefe;
+}
+
+.step-foreward {
+  width: 18px;
+  height: 18px;
+  x: 0px;
+  y: 0px;
+  enable-background: new 0 0 25 25;
+  margin-bottom: 5px;
+}
+
+.step-foreward g polygon {
+  fill: #fefefe;
+}
+
+#pause {
+  x: 0px;
+  y: 0px;
+  enable-background: new 0 0 25 25;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  margin-left: -38px;
+  cursor: pointer;
+}
+
+#pause rect {
+  fill: white;
+}
+
+#pause:hover rect {
+  fill: #8f4da9;
+}
+
+.step-backward g polygon:hover,
+.step-foreward g polygon:hover {
+  fill: #ef6dbc;
+  cursor: pointer;
+}
+
+p {
+  color: #bdbdbd;
+}
+
+#skip {
+  float: right;
+  margin-top: 10px;
+}
+
+#skip p {
+  color: #2980b9;
+}
+
+#skip p:hover {
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+.expend {
+  padding: 0.5px;
+  cursor: pointer;
+}
+
+.expend svg:hover g polygon {
+  fill: #ef6dbc;
+}
