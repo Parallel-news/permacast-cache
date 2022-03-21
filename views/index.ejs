@@ -3,205 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <title>Permacast | <%= metadata.episode_name %></title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
+    <link rel="stylesheet" href="/main.css">
   </head>
   <body>
-    <style type="text/css">
-      body {
-        background-color: transparent;
-      }
-      h1 {
-        font-family: monospace;
-        font-size: 16pt;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: white;
-        cursor: default;
-      }
-      h4 {
-        font-family: monospace;
-        font-size: 9pt;
-        font-weight: 400;
-        cursor: default;
-      }
-      h2 {
-        font-family: monospace;
-        font-size: 14pt;
-        font-weight: 300;
-        color: white;
-        cursor: default;
-      }
-      .player {
-        height: 200px;
-        width: 100%;
-        background-color: #1e2125;
-        position: fixed;
-        top: 0;
-        left: 0;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-      .player ul {
-        list-style: none;
-      }
-      .player ul li {
-        display: inline-block;
-      }
-      .cover {
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-      .cover img {
-        height: 200px;
-        width: 200px;
-      }
-      .info h1 {
-        margin-top: 15px;
-        margin-left: 180px;
-        line-height: 0;
-      }
-      .info h4 {
-        margin-left: 180px;
-        line-height: 13px;
-        color: #636367;
-      }
-      .info h2 {
-        margin-left: 180px;
-      }
-      .button-items {
-        margin-left: 180px;
-      }
-      #slider {
-        width: 75vw;
-        height: 8px;
-        background: #151518;
-        border-radius: 4px;
-      }
-      #slider div {
-        width: 4px;
-        height: 8px;
-        margin-top: 1px;
-        background: #ef6dbc;
-        border-radius: 4px;
-      }
-      #timer {
-        color: #494b4e;
-        line-height: 0;
-        font-size: 9pt;
-        float: right;
-        font-family: monospace;
-      }
-      .controls {
-        margin-top: 20px;
-      }
-      .controls svg:nth-child(2) {
-        margin-left: 5px;
-        margin-right: 5px;
-      }
-      #play {
-        padding: 0 3px;
-        width: 30px;
-        height: 30px;
-        x: 0px;
-        y: 0px;
-        enable-background: new 0 0 25 25;
-      }
-      #play g {
-        stroke: #fefefe;
-        stroke-width: 1;
-        stroke-miterlimit: 10;
-      }
-      #play g path {
-        fill: #fefefe;
-      }
-      #play:hover {
-        cursor: pointer;
-      }
-      #play:hover g {
-        stroke: #8f4da9;
-        cursor: pointer;
-      }
-      #play:hover g path {
-        fill: #9b59b6;
-        cursor: pointer;
-      }
-      .step-backward {
-        width: 18px;
-        height: 18px;
-        x: 0px;
-        y: 0px;
-        enable-background: new 0 0 25 25;
-        margin-bottom: 5px;
-      }
-      .step-backward g polygon {
-        fill: #fefefe;
-      }
-      .step-foreward {
-        width: 18px;
-        height: 18px;
-        x: 0px;
-        y: 0px;
-        enable-background: new 0 0 25 25;
-        margin-bottom: 5px;
-      }
-      .step-foreward g polygon {
-        fill: #fefefe;
-      }
-      #pause {
-        x: 0px;
-        y: 0px;
-        enable-background: new 0 0 25 25;
-        width: 30px;
-        height: 30px;
-        position: absolute;
-        margin-left: -38px;
-        cursor: pointer;
-      }
-      #pause rect {
-        fill: white;
-      }
-      #pause:hover rect {
-        fill: #8f4da9;
-      }
-      .step-backward g polygon:hover,
-      .step-foreward g polygon:hover {
-        fill: #ef6dbc;
-        cursor: pointer;
-      }
-      p {
-        color: #bdbdbd;
-      }
-      #skip {
-        float: right;
-        margin-top: 10px;
-      }
-      #skip p {
-        color: #2980b9;
-      }
-      #skip p:hover {
-        color: #e74c3c;
-        cursor: pointer;
-      }
-      .expend {
-        padding: 0.5px;
-        cursor: pointer;
-      }
-      .expend svg:hover g polygon {
-        fill: #ef6dbc;
-      }
-    </style>
+    <!-- <style type="text/css">
+      
+    </style> -->
 
-    <div class="player">
-      <ul>
-        <li class="cover"><img src="<%- metadata.podcast_cover %>" /></li>
-        <li class="info">
-          <h1><%= metadata.episode_podcast %></h1>
-          <h4><%= metadata.episode_desc %></h4>
-          <h2><%= metadata.episode_name %></h2>
+    <div class="player ">
+        <div class="cover"><img src="<%- metadata.podcast_cover %>" /></div>
+        <div class="info">
+          <h1 class="info-head"><%= metadata.episode_podcast %></h1>
+          <h4 class="info-text"><%= metadata.episode_desc %></h4>
+          <h2 class="info-text"><%= metadata.episode_name %></h2>
 
           <div class="button-items">
             <audio id="music" preload="auto" loop="false">
@@ -232,8 +47,7 @@
               </svg>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
     </div>
   </body>
   <script type="text/javascript">
