@@ -6,6 +6,7 @@ import {
   getEpisodes,
   singleEpisode,
   getProfileFeed,
+  getEpisodesFeed,
   getTotalPermacastSize,
 } from "./utils/cache.js";
 import { generateRss } from "./utils/rss.js";
@@ -28,6 +29,13 @@ app.set("view engine", "ejs");
 app.get("/feeds/podcasts", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
   const encodedFeed = await getPodcasts();
+  const jsonRes = JSON.parse(base64url.decode(encodedFeed));
+  res.send(jsonRes);
+});
+
+app.get("/feeds/allcontent", async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  const encodedFeed = await getEpisodesFeed();
   const jsonRes = JSON.parse(base64url.decode(encodedFeed));
   res.send(jsonRes);
 });
