@@ -186,6 +186,25 @@ export async function getProfileFeed(address) {
   return base64url(JSON.stringify(re));
 }
 
+export async function getEpisodesFeed() {
+  const response = await getPodcasts();
+
+  if (response === "e30") {
+    return base64url(JSON.stringify({ res: "pending" }));
+  }
+
+  const podcasts = JSON.parse(base64url.decode(response)).res;
+
+  const episodes = podcasts.map((podcast) => podcast.episodes).flat();
+  const sortedEpisodes = episodes.sort((a, b) => b.uploadedAt - a.uploadedAt);
+
+  const re = {
+    res: sortedEpisodes,
+  };
+
+  return base64url(JSON.stringify(re));
+}
+
 export async function polling(blocksNb) {
   try {
     while (true) {
