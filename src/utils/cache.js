@@ -193,10 +193,20 @@ export async function getEpisodesFeed() {
     return base64url(JSON.stringify({ res: "pending" }));
   }
 
+  let BLACKLISTED_EPISODES = (await getStateOf(MASKING_CONTRACT))?.episodes;
+
+  if (!BLACKLISTED_EPISODES) {
+    BLACKLISTED_EPISODES = BLACKLIST.episodes;
+  }
   const podcasts = JSON.parse(base64url.decode(response)).res;
 
   const episodes = podcasts.map((podcast) => podcast.episodes).flat();
-  const sortedEpisodes = episodes.sort((a, b) => b.uploadedAt - a.uploadedAt);
+  const filteredEpisodes = episodes.filter(
+    (episode) => !BLACKLISTED_EPISODES.includes(episode.eid)
+  );
+  const sortedEpisodes = filteredEpisodes.sort(
+    (a, b) => b.uploadedAt - a.uploadedAt
+  );
 
   const re = {
     res: sortedEpisodes,
