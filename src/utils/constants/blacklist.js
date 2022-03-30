@@ -26,7 +26,8 @@ export const BLACKLIST = {
     "e2MlvILxzO5t8q99Huk_rwBDnh1Ct9OqNvxmBwSvrS8",
     "zSpyxu97nq8S18GchE4JpLOwhGna-EGtMukPXm3ked0",
     "j71ILpUV1r7to23SnDQPfDpdIa8LRvtueTB85gTmJFc",
-    "pEsAptunDTz00HzdM2lOvL8SeIQedJk0sXpNkhtm4-c"
+    "pEsAptunDTz00HzdM2lOvL8SeIQedJk0sXpNkhtm4-c",
+    "tHWk_1UU5oQjmQLjgxYCIFkEjMNTdISDKqi_u8831js",
   ],
 };
 
