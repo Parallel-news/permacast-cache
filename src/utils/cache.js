@@ -215,6 +215,30 @@ export async function getEpisodesFeed() {
   return base64url(JSON.stringify(re));
 }
 
+export async function stats() {
+  try {
+    const size = JSON.parse(base64url.decode(await getTotalPermacastSize()));
+    if (size.total_byte_size === "pending") {
+      return base64url(
+        JSON.stringify({
+          total_byte_size: "pending",
+          total_episodes_count: "pending",
+        })
+      );
+    }
+
+    const episodesFeed = JSON.parse(base64url.decode(await getEpisodesFeed()));
+    const re = {
+      total_byte_size: size.total_byte_size,
+      total_episodes_count: episodesFeed.res.length,
+    };
+
+    return base64url(JSON.stringify(re));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function polling(blocksNb) {
   try {
     while (true) {
