@@ -1,6 +1,7 @@
 import { getFactoriesState } from "./utils/smartweave.js";
 import { getEpisodeMetadata } from "./embed/embeding.js";
 import {
+  stats,
   polling,
   getPodcasts,
   getEpisodes,
@@ -36,6 +37,13 @@ app.get("/feeds/podcasts", async (req, res) => {
 app.get("/feeds/allcontent", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
   const encodedFeed = await getEpisodesFeed();
+  const jsonRes = JSON.parse(base64url.decode(encodedFeed));
+  res.send(jsonRes);
+});
+
+app.get("/feeds/stats", async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  const encodedFeed = await stats();
   const jsonRes = JSON.parse(base64url.decode(encodedFeed));
   res.send(jsonRes);
 });
