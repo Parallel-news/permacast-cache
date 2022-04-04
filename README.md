@@ -243,5 +243,12 @@ Return: episode audio player fits for iframe embedding
 
 - GET `/feeds/allcontent` -> return a sorted feed of episodes objects.
 
+### 8- Get Network Stats
+Request: GET `/feeds/stats` 
+
+Response example: 
+```json
+{"total_byte_size":14627915958,"total_episodes_count":400}
+```
 ## License
 This project is licensed under the [MIT license](./LICENSE)
