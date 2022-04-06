@@ -186,8 +186,14 @@ export async function getProfileFeed(address) {
   return base64url(JSON.stringify(re));
 }
 
-export async function getEpisodesFeed() {
+export async function getEpisodesFeed(to_limit) {
   const response = await getPodcasts();
+  let re;
+
+  // default fallback value
+  if (to_limit && typeof to_limit !== "number" && to_limit <= 0) {
+    to_limit = 50;
+  }
 
   if (response === "e30") {
     return base64url(JSON.stringify({ res: "pending" }));
@@ -208,9 +214,15 @@ export async function getEpisodesFeed() {
     (a, b) => b.uploadedAt - a.uploadedAt
   );
 
-  const re = {
-    res: sortedEpisodes,
-  };
+  if (!to_limit) {
+    re = {
+      res: sortedEpisodes,
+    };
+  } else {
+    re = {
+      res: sortedEpisodes.slice(0, to_limit),
+    };
+  }
 
   return base64url(JSON.stringify(re));
 }
