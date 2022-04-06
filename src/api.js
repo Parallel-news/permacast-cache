@@ -34,9 +34,9 @@ app.get("/feeds/podcasts", async (req, res) => {
   res.send(jsonRes);
 });
 
-app.get("/feeds/allcontent", async (req, res) => {
+app.get("/feeds/allcontent/:limit?", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
-  const encodedFeed = await getEpisodesFeed();
+  const encodedFeed = await getEpisodesFeed(req.params.limit);
   const jsonRes = JSON.parse(base64url.decode(encodedFeed));
   res.send(jsonRes);
 });
