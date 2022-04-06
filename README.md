@@ -241,7 +241,8 @@ Return: episode audio player fits for iframe embedding
 
 ### 7- Get All Episodes
 
-- GET `/feeds/allcontent` -> return a sorted feed of episodes objects.
+- GET `/feeds/allcontent/limit?` -> return a sorted feed of episodes objects.
+- `limit`: optional parameter the return the `allcontent` feed sliced with the given limit
 
 ### 8- Get Network Stats
 Request: GET `/feeds/stats` 
