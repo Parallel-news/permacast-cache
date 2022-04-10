@@ -1,5 +1,6 @@
 import NodeCache from "node-cache";
 import base64url from "base64url";
+import { sort } from "./sort.js";
 import { getFactoriesState, getStateOf } from "./smartweave.js";
 import { BLACKLIST, MASKING_CONTRACT } from "./constants/blacklist.js";
 const base64Cache = new NodeCache();
@@ -235,14 +236,24 @@ export async function stats() {
         JSON.stringify({
           total_byte_size: "pending",
           total_episodes_count: "pending",
+          last_active_podcast: "pending",
+          last_added_episode: "pending",
         })
       );
     }
 
     const episodesFeed = JSON.parse(base64url.decode(await getEpisodesFeed()));
+    const podcastsFeed = JSON.parse(
+      base64url.decode(await sort("podcastsactivity"))
+    );
+    const last_added_episode = episodesFeed["res"][0]?.eid;
+    const last_active_podcast = podcastsFeed["res"][0]?.pid;
+
     const re = {
       total_byte_size: size.total_byte_size,
       total_episodes_count: episodesFeed.res.length,
+      last_active_podcast: last_active_podcast,
+      last_added_episode: last_added_episode,
     };
 
     return base64url(JSON.stringify(re));
@@ -250,6 +261,7 @@ export async function stats() {
     console.log(error);
   }
 }
+
 
 export async function polling(blocksNb) {
   try {
