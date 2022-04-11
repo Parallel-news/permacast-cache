@@ -13,6 +13,7 @@ export const BLACKLIST = {
     "ZMv5aUFSu_ya6A7JpZe9gxwLSV9sEMQSqHndiHSzvpc",
     "LWcXYMGlm_UEo826MDHQY5gyS3lAmUmnCVr9euIjseU",
     "-PHG7d4Lqp7CvdiE8Wzc8ZuR1vIjUhZ30IVLSnLqsOQ",
+    "cyYeU5M7O-0GrXDg46dmXxJfRYwGBUgvAzRo9iDfQ0U",
   ],
   episodes: [
     "qAKLFkO_PZwcXzvt9naoZ3KzatTqxrxWXc7kk8LcSJI",
