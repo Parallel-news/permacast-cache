@@ -30,12 +30,12 @@ async function blacklistFactoryPodcast(state) {
     blacklistedPodcastsArray = BLACKLIST.podcasts;
   }
   const blacklistedPodcasts = state.podcasts.filter((podObj) =>
-    blacklistedPodcastsArray.includes(podObj.pid)
+    blacklistedPodcastsArray.includes(podObj.pid) || !podObj.isVisible
   );
 
   if (blacklistedPodcasts.length > 0) {
     const filteredPodcasts = state.podcasts.filter(
-      (pod) => !blacklistedPodcasts.includes(pod)
+      (pod) => !blacklistedPodcasts.includes(pod) || pod.isVisible
     );
 
     state.podcasts = filteredPodcasts;

@@ -34,7 +34,7 @@ async function removeBlacklists(podObj) {
   }
 
   const blacklists = episodes.filter((episode) =>
-    BLACKLISTED_EPISODES.episodes.includes(episode.eid)
+    BLACKLISTED_EPISODES.episodes.includes(episode.eid) || !episode.isVisible
   );
 
   if (blacklists.length === 0) {

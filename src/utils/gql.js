@@ -5,9 +5,8 @@ export const permacastDeepGraphs = {
     query: `query {
   transactions(
     tags: [
-        { name: "Protocol", values: "permacast-testnet-v3"},
-        { name: "Action", values: "launchCreator"},
-        { name: "Contract-Src", values: "KrMNSCljeT0sox8bengHf0Z8dxyE0vCTLEAOtkdrfjM"}
+        { name: "App-Name", values: "SmartWeaveContract"},
+        { name: "Contract-Src", values: "4KjHMdvhbhhe7leAsyQiGXCL7h1IaYMWAYFYtkit_vo"}
         ]
     first: 250
   ) {
