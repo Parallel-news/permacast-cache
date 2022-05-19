@@ -1,6 +1,6 @@
 {
   "name": "permacast-cache",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "type": "module",
   "description": "cache node for Permacast",
   "main": "./src/api.js",
@@ -16,6 +16,7 @@
   "author": "charmful0x",
   "license": "MIT",
   "dependencies": {
+    "@three-em/node": "^0.2.11",
     "arweave": "^1.10.18",
     "axios": "^0.24.0",
     "base64url": "^3.0.1",
@@ -24,8 +25,8 @@
     "express": "^4.17.1",
     "memory-cache": "^0.2.0",
     "node-cache": "^5.1.2",
-    "redstone-smartweave": "^0.4.2",
+    "redstone-smartweave": "^0.4.4",
     "rss": "^1.2.2",
-    "smartweave": "^0.4.46"
+    "smartweave": "^0.4.48"
   }
 }
