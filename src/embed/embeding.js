@@ -28,7 +28,7 @@ export async function getEpisodeMetadata(eid) {
 
     const episodeMetadata = {
       episode_name: episode.episodeName,
-      episode_url: `https://arweave.net/${episode.audioTx}`,
+      episode_url: `https://arweave.net/${episode.contentTx}`,
       episode_desc: episode.description,
       episode_podcast: podcast.podcastName,
       podcast_cover: `https://arweave.net/${podcast.cover}`,
