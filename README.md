@@ -1,6 +1,8 @@
 # permacast-cache
-cache node for [permacast.net](https://permacast.net)
+cache node for [permacast.dev](https://permacast.dev)
 
+- V2 API endpoint address (deprecated): https://permacast-cache.herokuapp.com/
+- V3 API endpoint address (active): https://whispering-retreat-94540.herokuapp.com/ 
 ## Supported Endpoints
 
 ### 1- Permacast Podcasts Object:

@@ -2,6 +2,7 @@ import NodeCache from "node-cache";
 import base64url from "base64url";
 import { sort } from "./sort.js";
 import { getFactoriesState, getStateOf } from "./smartweave.js";
+import { V2_V3_ARRAY } from "./constants/v2_v3_conversion.js";
 import { BLACKLIST, MASKING_CONTRACT } from "./constants/blacklist.js";
 const base64Cache = new NodeCache();
 
@@ -13,7 +14,7 @@ async function cache() {
   }
 
   if (base64urlState !== base64Cache.get("state")) {
-    console.log(`NEW STATE CACHED: ${base64urlState}`)
+    console.log(`NEW STATE CACHED: ${base64urlState}`);
     base64Cache.set("state", base64urlState);
   } else {
     console.log(`\n\n\n\n\n STATE ALREADY CACHED: ${base64Cache.get("state")}`);
@@ -26,15 +27,16 @@ function sleep(ms) {
 
 async function removeBlacklists(podObj) {
   const episodes = podObj["episodes"];
-//   podObj["original_episodes_array"] = episodes;
+  //   podObj["original_episodes_array"] = episodes;
   let BLACKLISTED_EPISODES = await getStateOf(MASKING_CONTRACT);
-  
+
   if (!BLACKLISTED_EPISODES) {
     BLACKLISTED_EPISODES = BLACKLIST;
   }
 
-  const blacklists = episodes.filter((episode) =>
-    BLACKLISTED_EPISODES.episodes.includes(episode.eid)
+  const blacklists = episodes.filter(
+    (episode) =>
+      BLACKLISTED_EPISODES.episodes.includes(episode.eid) || !episode.isVisible
   );
 
   if (blacklists.length === 0) {
@@ -81,11 +83,12 @@ export async function getPodcasts() {
     if (podcasts.length > 1) {
       for (let podcast of podcasts) {
         delete podcast["logs"];
-          res.push(podcast);
-
+        podcast.superAdmins = factory.superAdmins;
+        res.push(podcast);
       }
     } else {
       delete podcasts[0]["logs"];
+      podcasts[0].superAdmins = factory.superAdmins;
       res.push(podcasts[0]);
     }
   }
@@ -113,7 +116,7 @@ export async function getEpisodes(pid) {
     return EMPTY_OBJECT;
   }
 
-  const podcastObject = await removeBlacklists(podcasts[podcastIndex])
+  const podcastObject = await removeBlacklists(podcasts[podcastIndex]);
   return base64url(JSON.stringify(podcastObject));
 }
 
@@ -159,7 +162,7 @@ export async function getTotalPermacastSize() {
     if (episodes.length === 0) {
       continue;
     }
-    const sizeArray = episodes.map((ep) => ep.audioTxByteSize);
+    const sizeArray = episodes.map((ep) => ep.contentTxByteSize);
     const podcastSize = sizeArray.reduce((a, b) => a + b, 0);
     totalSize += podcastSize;
   }
@@ -261,7 +264,6 @@ export async function stats() {
     console.log(error);
   }
 }
-
 
 export async function polling(blocksNb) {
   try {

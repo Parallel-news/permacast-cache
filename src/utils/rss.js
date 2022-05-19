@@ -41,8 +41,8 @@ export async function generateRss(pid) {
       title: episode.episodeName,
       description: episode.description,
       enclosure: {
-        url: `https://arweave.net/${episode.audioTx}`,
-        size: episode.audioTxByteSize,
+        url: `https://arweave.net/${episode.contentTx}`,
+        size: episode.contentTxByteSize,
         type: episode.type,
       },
       guid: episode.eid,
