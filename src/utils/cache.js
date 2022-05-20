@@ -1,7 +1,7 @@
 import NodeCache from "node-cache";
 import base64url from "base64url";
 import { sort } from "./sort.js";
-import { getFactoriesState, getStateOf } from "./smartweave.js";
+import { getFactoriesState, getStateOf, getAnsState } from "./smartweave.js";
 import { V2_V3_ARRAY } from "./constants/v2_v3_conversion.js";
 import { BLACKLIST, MASKING_CONTRACT } from "./constants/blacklist.js";
 const base64Cache = new NodeCache();
@@ -63,6 +63,7 @@ async function getPermacast() {
 
 export async function getPodcasts() {
   const encodedPermacast = await getPermacast();
+
   // "{}" in base64url
   const EMPTY_OBJECT = "e30";
   const res = [];
@@ -71,6 +72,7 @@ export async function getPodcasts() {
     return EMPTY_OBJECT;
   }
 
+  const ansState = await getAnsState();
   const decodedPermacast = JSON.parse(base64url.decode(encodedPermacast));
 
   for (let factory of decodedPermacast.res) {
@@ -80,16 +82,19 @@ export async function getPodcasts() {
       continue;
     }
 
-    if (podcasts.length > 1) {
-      for (let podcast of podcasts) {
-        delete podcast["logs"];
-        podcast.superAdmins = factory.superAdmins;
-        res.push(podcast);
-      }
-    } else {
-      delete podcasts[0]["logs"];
-      podcasts[0].superAdmins = factory.superAdmins;
-      res.push(podcasts[0]);
+    for (let podcast of podcasts) {
+      // set ansLabel if it was found
+      const anslabelIndex = ansState.findIndex(
+        (users) => users.user === podcast.owner
+      );
+      podcast.ansOwnerLabel =
+        anslabelIndex !== -1
+          ? `${ansState[anslabelIndex].currentLabel}.ar`
+          : ``;
+
+      delete podcast["logs"];
+      podcast.superAdmins = factory.superAdmins;
+      res.push(podcast);
     }
   }
 
