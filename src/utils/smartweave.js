@@ -26,20 +26,12 @@ async function blacklistFactoryPodcast(state) {
   // remove the podcast object from the factory's
   // state and return the new state if blacklist
   // was found
-  let blacklistedPodcastsArray = (await getStateOf(MASKING_CONTRACT))?.podcasts;
-
-  if (!blacklistedPodcastsArray) {
-    blacklistedPodcastsArray = BLACKLIST.podcasts;
-  }
   const blacklistedPodcasts = state.podcasts.filter(
-    (podObj) =>
-      blacklistedPodcastsArray.includes(podObj.pid) || !podObj.isVisible
+    (podObj) => !podObj.isVisible
   );
 
   if (blacklistedPodcasts.length > 0) {
-    const filteredPodcasts = state.podcasts.filter(
-      (pod) => !blacklistedPodcasts.includes(pod) || pod.isVisible
-    );
+    const filteredPodcasts = state.podcasts.filter((pod) => pod.isVisible);
 
     state.podcasts = filteredPodcasts;
     return state;
@@ -52,9 +44,8 @@ export async function getFactoriesState() {
   const factoriesObj = await getFactoriesObjects();
   const states = [];
   for (let factory of factoriesObj) {
-    console.log(factory);
     const v2Possibility = V2_V3_ARRAY.findIndex((f) => f.new === factory.id);
-    console.log(v2Possibility);
+
     const unfiliteredState = await getStateOf(factory.id);
 
     if (v2Possibility !== -1) {
@@ -82,8 +73,7 @@ export async function getFactoriesState() {
 }
 
 export async function getStateOf(contractId) {
-  // const contract = smartweave.contract(contractId);
-  // const contractState = (await contract.readState()).state;
+
   try {
     const contractState = await readContract(contractId);
 
@@ -96,15 +86,14 @@ export async function getStateOf(contractId) {
 }
 export async function getAnsState() {
   try {
+    const users = (await axios.get("https://ans-stats.decent.land/users"))?.data
+      .res;
+
+    return users;
+  } catch (error) {
     const users = (await getStateOf(ANS_SWC_ID))?.users;
 
     return users;
-
-  } catch(error) {
-    // fallback to cache when the gateway
-    // is not stable
-    const users = await axios.get("https://ans-stats.decent.land/users")?.data?.res;
-    return users;
-    console.log(error)
+    console.log(error);
   }
 }
