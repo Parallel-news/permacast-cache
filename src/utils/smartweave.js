@@ -1,8 +1,10 @@
 import { arweave, readContract } from "./arweave.js";
 import { BLACKLIST, MASKING_CONTRACT } from "./constants/blacklist.js";
 import { V2_V3_ARRAY } from "./constants/v2_v3_conversion.js";
+import { ANS_SWC_ID } from "./constants/ans_address.js";
 import { gqlTemplate, permacastDeepGraphs } from "./gql.js";
 import base64url from "base64url";
+import axios from "axios";
 
 export async function getFactoriesObjects() {
   const factories = [];
@@ -90,5 +92,19 @@ export async function getStateOf(contractId) {
     console.log(error);
     console.log(`SMARTWEAVE ERROR: ${error.name} : ${error.description}`);
     return false;
+  }
+}
+export async function getAnsState() {
+  try {
+    const users = (await getStateOf(ANS_SWC_ID))?.users;
+
+    return users;
+
+  } catch(error) {
+    // fallback to cache when the gateway
+    // is not stable
+    const users = await axios.get("https://ans-stats.decent.land/users")?.data?.res;
+    return users;
+    console.log(error)
   }
 }
