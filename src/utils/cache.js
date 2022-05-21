@@ -27,28 +27,8 @@ function sleep(ms) {
 
 async function removeBlacklists(podObj) {
   const episodes = podObj["episodes"];
-  //   podObj["original_episodes_array"] = episodes;
-  let BLACKLISTED_EPISODES = await getStateOf(MASKING_CONTRACT);
 
-  if (!BLACKLISTED_EPISODES) {
-    BLACKLISTED_EPISODES = BLACKLIST;
-  }
-
-  const blacklists = episodes.filter(
-    (episode) =>
-      BLACKLISTED_EPISODES.episodes.includes(episode.eid) || !episode.isVisible
-  );
-
-  if (blacklists.length === 0) {
-    return podObj;
-  }
-
-  for (let episode of blacklists) {
-    const epIndex = episodes.findIndex((ep) => ep.eid === episode.eid);
-    episodes.splice(epIndex, 1);
-  }
-
-  podObj["episodes"] = episodes;
+  podObj["episodes"] = episodes.filter((episode) => episode.isVisible);
 
   return podObj;
 }
@@ -208,17 +188,12 @@ export async function getEpisodesFeed(to_limit) {
     return base64url(JSON.stringify({ res: "pending" }));
   }
 
-  let BLACKLISTED_EPISODES = (await getStateOf(MASKING_CONTRACT))?.episodes;
-
-  if (!BLACKLISTED_EPISODES) {
-    BLACKLISTED_EPISODES = BLACKLIST.episodes;
-  }
   const podcasts = JSON.parse(base64url.decode(response)).res;
 
   const episodes = podcasts.map((podcast) => podcast.episodes).flat();
-  const filteredEpisodes = episodes.filter(
-    (episode) => !BLACKLISTED_EPISODES.includes(episode.eid)
-  );
+
+  const filteredEpisodes = episodes.filter((episode) => episode.isVisible);
+
   const sortedEpisodes = filteredEpisodes.sort(
     (a, b) => b.uploadedAt - a.uploadedAt
   );
