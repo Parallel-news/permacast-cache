@@ -63,10 +63,11 @@ export async function getPodcasts() {
     }
 
     for (let podcast of podcasts) {
-      // set ansLabel if it was found
-      const anslabelIndex = ansState.findIndex(
-        (users) => users.user === podcast.owner
-      );
+      // set ansLabel if it was found or omit the operation
+      // incase ANS cache && arweave.net were unstable
+      const anslabelIndex = !!ansState
+        ? ansState.findIndex((users) => users.user === podcast.owner)
+        : -1;
       podcast.ansOwnerLabel =
         anslabelIndex !== -1
           ? `${ansState[anslabelIndex].currentLabel}.ar`
