@@ -1,6 +1,10 @@
 # permacast-cache
 cache node for [permacast.dev](https://permacast.dev)
 
+## Testnet Details
+- testnet contracts source code: [h9zWa4bdZKYA4ZKlRaPSHYbuWYblyHaKUjyYS-u2EgQ](https://viewblock.io/arweave/tx/h9zWa4bdZKYA4ZKlRaPSHYbuWYblyHaKUjyYS-u2EgQ)
+- contract (factory contract) example: [iBNuVd-B6m1L7TG5NWeMdavTe9zmC4G-WlaaeQfnGkU](https://viewblock.io/arweave/address/iBNuVd-B6m1L7TG5NWeMdavTe9zmC4G-WlaaeQfnGkU)
+## API Endpoints
 - V2 API endpoint address (deprecated): https://permacast-cache.herokuapp.com/
 - V3 API endpoint address (active): https://whispering-retreat-94540.herokuapp.com/ 
 ## Supported Endpoints
