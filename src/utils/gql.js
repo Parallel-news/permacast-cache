@@ -4,12 +4,13 @@ export const permacastDeepGraphs = {
   factories: {
     query: `query {
   transactions(
+  block: {min: 0, max: 953792}
     tags: [
         { name: "App-Name", values: "SmartWeaveContract"},
         { name: "Contract-Src", values: "-SoIrUzyGEBklizLQo1w5AnS7uuOB87zUrg-kN1QWw4"},
         { name: "Permacast-Version", values: "amber"}
         ]
-    first: 250
+    first: 100
   ) {
     edges {
       node {
@@ -29,12 +30,13 @@ export function factoryMetadataGraph(factory_id) {
   return {
     query: `query {
   transactions(
+  block: {min: 0, max: 953792}
     tags: [
         { name: "App-Name", values: "SmartWeaveAction"},
         { name: "App-Version", values: "0.3.0"},
         { name: "Contract", values: "${factory_id}"}
         ]
-    first: 250
+    first: 100
   ) {
     edges {
       node {
