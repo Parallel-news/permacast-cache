@@ -2,13 +2,13 @@ import { arweave, readContract } from "./arweave.js";
 import { BLACKLIST, MASKING_CONTRACT } from "./constants/blacklist.js";
 import { V2_V3_ARRAY } from "./constants/v2_v3_conversion.js";
 import { ANS_SWC_ID } from "./constants/ans_address.js";
-import { gqlTemplate, permacastDeepGraphs } from "./gql.js";
+import { makeQueries } from "./gql.js";
 import base64url from "base64url";
 import axios from "axios";
 
 export async function getFactoriesObjects() {
   const factories = [];
-  const factoriesObjects = await gqlTemplate(permacastDeepGraphs.factories);
+  const factoriesObjects = await makeQueries();
 
   for (let factory of factoriesObjects) {
     factories.push({
