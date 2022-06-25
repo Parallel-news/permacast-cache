@@ -237,9 +237,14 @@ Request: GET `/embed/:eid`
 Return: episode audio player fits for iframe embedding
 
 ### 6- Sort feeds
+- GET `/feed/podcasts/sort/<criteria>`
 
-- GET `/feeds/podcasts/sort/episodescount` -> sort podcasts by the episodes count
-- GET `/feeds/podcasts/sort/podcastsactivity` -> sort podcasts by latest activity
+| criteria key  | description |
+| ------------- |:-------------:|
+| `episodescount`     | sort podcasts by episodes count     |
+| `episodescount1`      | sort non-empty podcasts by episodes count     |
+| `podcastsactivity`     | sort podcasts by latest activity     |
+| `podcastsactivity1`| sort non-empty podcasts by latest activity |
 
 ### 7- Get All Episodes
 
