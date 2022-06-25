@@ -15,7 +15,7 @@ async function episodesCountSorting() {
       (a, b) => b.episodes.length - a.episodes.length
     );
 
-    return base64url(JSON.stringify({res: sortedState}));
+    return base64url(JSON.stringify({ res: sortedState }));
   } catch (error) {
     console.log(error);
   }
@@ -42,7 +42,53 @@ async function podcastsActivitySorting() {
     const sortedState = decodedPermacast.res.sort(
       (a, b) => b.latestUpload - a.latestUpload
     );
-    return base64url(JSON.stringify({res: sortedState}));
+    return base64url(JSON.stringify({ res: sortedState }));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function nonEmptypodcastsActivitySorting() {
+  try {
+    const EMPTY_OBJECT = "e30";
+
+    const encodedSortedState = await podcastsActivitySorting();
+
+    if (encodedSortedState === EMPTY_OBJECT) {
+      return EMPTY_OBJECT;
+    }
+
+    const decodedSortedState = JSON.parse(
+      base64url.decode(encodedSortedState)
+    )?.res;
+    const filteredState = decodedSortedState.filter(
+      (pod) => pod.episodes.length > 0
+    );
+
+    return base64url(JSON.stringify({ res: filteredState }));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function nonEmptyepisodesCountSorting() {
+  try {
+    const EMPTY_OBJECT = "e30";
+
+    const encodedSortedState = await episodesCountSorting();
+
+    if (encodedSortedState === EMPTY_OBJECT) {
+      return EMPTY_OBJECT;
+    }
+
+    const decodedSortedState = JSON.parse(
+      base64url.decode(encodedSortedState)
+    )?.res;
+    const filteredState = decodedSortedState.filter(
+      (pod) => pod.episodes.length > 0
+    );
+
+    return base64url(JSON.stringify({ res: filteredState }));
   } catch (error) {
     console.log(error);
   }
@@ -55,6 +101,10 @@ export async function sort(type) {
         return await episodesCountSorting();
       case "podcastsactivity":
         return await podcastsActivitySorting();
+      case "episodescount1":
+        return await nonEmptyepisodesCountSorting();
+      case "podcastsactivity1":
+        return nonEmptypodcastsActivitySorting();
       default:
         return await getPodcasts();
     }
