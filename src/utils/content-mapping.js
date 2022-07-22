@@ -17,6 +17,7 @@ export async function getPairs() {
       if (podcast.isVisible) {
         result.push({
           id: podcast.pid,
+          cover: podcast.cover,
           title: podcast.podcastName,
           type: "pid",
         });
@@ -25,6 +26,7 @@ export async function getPairs() {
           if (episode.isVisible) {
             result.push({
               id: episode.eid,
+              cover: podcast.cover,
               title: episode.episodeName,
               type: "eid",
             });
