@@ -12,6 +12,7 @@ import {
 } from "./utils/cache.js";
 import { generateRss } from "./utils/rss.js";
 import { sort } from "./utils/sort.js";
+import { getPairs } from "./utils/content-mapping.js";
 import express from "express";
 import base64url from "base64url";
 import cors  from "cors";
@@ -20,7 +21,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 
-app.use(express.static('public'))
+app.use(express.static("public"))
 
 app.use(cors({
     origin: "*"
@@ -92,6 +93,13 @@ app.get("/embed/:eid", async(req, res) => {
 app.get("/feeds/podcasts/sort/:type", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
   const encodedRes = await sort(req.params.type);
+  const jsonRes = JSON.parse(base64url.decode(encodedRes));
+  res.send(jsonRes);
+});
+
+app.get("/feeds/content/mapping", async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  const encodedRes = await getPairs();
   const jsonRes = JSON.parse(base64url.decode(encodedRes));
   res.send(jsonRes);
 });
