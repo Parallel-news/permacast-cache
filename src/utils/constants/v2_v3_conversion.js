@@ -84,4 +84,9 @@ export const V2_V3_ARRAY =[
     new: "_mF85KX4KgKEfb6PF8fQu2LNXgH3az0U1M6JVTq38b4",
     owner: "kaYP9bJtpqON8Kyy3RbqnqdtDBDUsPTQTNUCvZtKiFI",
   },
+  {
+    old: "CRV2f3s_u3OEXTMSKOnkls_ihtuvVddYh1t6q6eZqIs",
+    new: "jU0GfZHcXq4ZhdHz65zYBiB4T-NsBpZPalIvc3huWmk",
+    owner: "u3cs3x6tvytcR6rv3JgoCK8t1dsIJyaf_Rx7MJzxc-I",
+  },
 ];
