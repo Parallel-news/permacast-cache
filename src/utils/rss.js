@@ -26,6 +26,7 @@ export async function generateRss(pid) {
     custom_elements: [
       { "itunes:image": { _attr: { href: IMG } } },
       { "itunes:explicit": podcast.explicit },
+      { "itunes:category": podcast.categories},
       { "itunes:author": podcast.author },
       {
         "itunes:owner": [
