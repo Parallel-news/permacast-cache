@@ -21,7 +21,7 @@ export async function generateRss(pid) {
     managingEditor: podcast.email,
     categories: podcast.categories,
     image_url: IMG,
-    site_url: `https://permacast.dev/#/podcasts/${podcast.pid}`,
+    site_url: `https://legacy.permacast.dev/#/podcasts/${podcast.pid}`,
     language: podcast.language,
     custom_elements: [
       { "itunes:image": { _attr: { href: IMG } } },
