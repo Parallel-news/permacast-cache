@@ -15,13 +15,13 @@ export async function generateRss(pid) {
   const podcast = JSON.parse(base64url.decode(podcastObject));
   const IMG = `https://arweave.net/${podcast.cover}`;
   const IMG_REDICRECT = await getTxRedirectUrl(podcast.cover);
-
+  const categories = podcast.categories.toString().replaceAll("&", "&amp;").split(",");
   const feed = new RSS({
     custom_namespaces: { itunes: "http://www.itunes.com/dtds/podcast-1.0.dtd" },
     title: podcast.podcastName,
     description: podcast.description,
     managingEditor: podcast.email,
-    categories: podcast.categories,
+    categories: categories,
     image_url: IMG_REDICRECT,
     site_url: `https://legacy.permacast.dev/#/podcasts/${podcast.pid}`,
     language: podcast.language,
@@ -32,7 +32,7 @@ export async function generateRss(pid) {
         "itunes:category": [
           {
             _attr: {
-              text: podcast.categories
+              text: categories
             }
           }]
       },
